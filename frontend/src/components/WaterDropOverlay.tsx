@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 
 interface WaterDrop {
     title: string;
@@ -19,7 +19,7 @@ export function WaterDropOverlay({ isVisible }: WaterDropOverlayProps) {
     useEffect(() => {
         if (isVisible && !hasFetched) {
             setLoading(true);
-            fetch('http://localhost:4000/api/ai/waterdrop-zoom')
+            fetch('${import.meta.env.VITE_API_URL}/api/ai/waterdrop-zoom')
                 .then(res => res.json())
                 .then(data => {
                     if (data.success) {

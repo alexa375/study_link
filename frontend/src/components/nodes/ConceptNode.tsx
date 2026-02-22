@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { Handle, Position, type NodeProps } from '@xyflow/react';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -60,7 +60,7 @@ export function ConceptNode({ id, data }: NodeProps) {
         setIsSavingLink(true);
         try {
             const updatedLinks = [...(nodeData.links || []), newLink.trim()];
-            const res = await fetch(`http://localhost:4000/api/concepts/${id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/concepts/${id}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ links: updatedLinks }),
@@ -95,7 +95,7 @@ export function ConceptNode({ id, data }: NodeProps) {
 
         // Sync with backend
         try {
-            await fetch(`http://localhost:4000/api/concepts/${id}`, {
+            await fetch(`${import.meta.env.VITE_API_URL}/api/concepts/${id}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ links: updatedLinks }),

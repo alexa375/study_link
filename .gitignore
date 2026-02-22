@@ -2,7 +2,7 @@
 node_modules/
 
 # 환경 변수 파일 (API 키, DB 비밀번호 등 보안 민감 정보)
-.env
+.env*
 .env.local
 .env.development.local
 .env.test.local

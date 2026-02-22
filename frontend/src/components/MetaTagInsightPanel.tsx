@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 
 interface MetaTagInsightPanelProps {
     tag: string;
@@ -11,7 +11,7 @@ export function MetaTagInsightPanel({ tag, onClose }: MetaTagInsightPanelProps) 
     const [matchingLabels, setMatchingLabels] = useState<string[]>([]);
 
     useEffect(() => {
-        fetch(`http://localhost:4000/api/ai/meta-pattern?tag=${encodeURIComponent(tag)}`)
+        fetch(`${import.meta.env.VITE_API_URL}/api/ai/meta-pattern?tag=${encodeURIComponent(tag)}`)
             .then(res => res.json())
             .then(data => {
                 if (data.success) {

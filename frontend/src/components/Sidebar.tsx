@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -31,7 +31,7 @@ function AddConceptPanel({ onConceptAdded, mapId }: { onConceptAdded: () => void
         const id = crypto.randomUUID();
         setLoading(true);
         try {
-            const res = await fetch('http://localhost:4000/api/concepts', {
+            const res = await fetch('${import.meta.env.VITE_API_URL}/api/concepts', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ id, ...formData, mapId }),
@@ -94,7 +94,7 @@ function SearchPanel() {
         if (!window.confirm('정말 이 개념을 삭제하시겠습니까? 관련 경로도 모두 삭제됩니다.')) return;
 
         try {
-            const res = await fetch(`http://localhost:4000/api/concepts/${id}`, { method: 'DELETE' });
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/concepts/${id}`, { method: 'DELETE' });
             const data = await res.json();
             if (data.success) {
                 // Remove from frontend
@@ -175,7 +175,7 @@ function PathfindingPanel({ onPathFound, onClearPath }: { onPathFound: (n: any[]
         setPathExists(false);
         setWaterDropStory(null);
         try {
-            const res = await fetch(`http://localhost:4000/api/graph/path?startId=${startId}&endId=${endId}`);
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/graph/path?startId=${startId}&endId=${endId}`);
             const data = await res.json();
             if (data.success) {
                 setPathExists(true);
@@ -200,7 +200,7 @@ function PathfindingPanel({ onPathFound, onClearPath }: { onPathFound: (n: any[]
         if (!startId || !endId) return;
         setLoadingAi(true);
         try {
-            const res = await fetch(`http://localhost:4000/api/ai/waterdrop?sourceId=${startId}&targetId=${endId}`);
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/ai/waterdrop?sourceId=${startId}&targetId=${endId}`);
             const data = await res.json();
             if (data.success) setWaterDropStory(data.answer);
             else alert('해설을 불러오지 못했습니다.');
@@ -298,7 +298,7 @@ function DetailPanel() {
         e.preventDefault();
         setSaving(true);
         try {
-            const res = await fetch(`http://localhost:4000/api/concepts/${selectedNode.id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/concepts/${selectedNode.id}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

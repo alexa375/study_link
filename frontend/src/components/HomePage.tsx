@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -63,7 +63,7 @@ export function HomePage({ onEnterMap }: HomePageProps) {
 
     const fetchMaps = async () => {
         try {
-            const res = await fetch('http://localhost:4000/api/maps');
+            const res = await fetch('${import.meta.env.VITE_API_URL}/api/maps');
             const data = await res.json();
             if (data.success) setMaps(data.data);
         } catch {
@@ -83,7 +83,7 @@ export function HomePage({ onEnterMap }: HomePageProps) {
             const isEditing = !!editingMapId;
             const id = isEditing ? editingMapId! : crypto.randomUUID();
             const method = isEditing ? 'PATCH' : 'POST';
-            const url = isEditing ? `http://localhost:4000/api/maps/${id}` : 'http://localhost:4000/api/maps';
+            const url = isEditing ? `${import.meta.env.VITE_API_URL}/api/maps/${id}` : '${import.meta.env.VITE_API_URL}/api/maps';
 
             const res = await fetch(url, {
                 method,
@@ -105,7 +105,7 @@ export function HomePage({ onEnterMap }: HomePageProps) {
         e.stopPropagation();
         if (!window.confirm('이 마인드맵과 모든 개념을 삭제하시겠습니까?')) return;
         try {
-            await fetch(`http://localhost:4000/api/maps/${id}`, { method: 'DELETE' });
+            await fetch(`${import.meta.env.VITE_API_URL}/api/maps/${id}`, { method: 'DELETE' });
             fetchMaps();
         } catch { alert('삭제 실패'); }
     };
@@ -120,7 +120,7 @@ export function HomePage({ onEnterMap }: HomePageProps) {
         setMaps(reordered);
 
         try {
-            await fetch('http://localhost:4000/api/maps/reorder', {
+            await fetch('${import.meta.env.VITE_API_URL}/api/maps/reorder', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ orderedIds: reordered.map(m => m.id) }),

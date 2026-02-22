@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+﻿import { useEffect, useState, useCallback } from 'react';
 import {
     ReactFlow,
     Controls,
@@ -39,7 +39,7 @@ function FlowMap({ mapId }: { mapId: string }) {
     const handleDeleteConcept = useCallback(async (id: string) => {
         if (!window.confirm('정말 이 개념을 삭제하시겠습니까? 연결된 모든 경로도 함께 지워집니다.')) return;
         try {
-            const res = await fetch(`http://localhost:4000/api/concepts/${id}`, { method: 'DELETE' });
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/concepts/${id}`, { method: 'DELETE' });
             const data = await res.json();
             if (data.success) {
                 const { nodes: currentNodes, edges: currentEdges, setNodes, setEdges } = useStore.getState();
@@ -56,7 +56,7 @@ function FlowMap({ mapId }: { mapId: string }) {
     const fetchGraphData = useCallback(async () => {
         setLoading(true);
         try {
-            const nodeRes = await fetch(`http://localhost:4000/api/concepts?mapId=${mapId}`);
+            const nodeRes = await fetch(`${import.meta.env.VITE_API_URL}/api/concepts?mapId=${mapId}`);
             const nodeJson = await nodeRes.json();
 
             if (nodeJson.success) {
