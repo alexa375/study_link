@@ -1,0 +1,21 @@
+# 의존성 패키지 (용량이 너무 크고 다시 설치 가능함)
+node_modules/
+
+# 환경 변수 파일 (API 키, DB 비밀번호 등 보안 민감 정보)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 빌드 결과물
+dist/
+build/
+out/
+
+# 운영체제 생성 파일
+.DS_Store
+Thumbs.db
+
+# 로그 파일
+*.log
