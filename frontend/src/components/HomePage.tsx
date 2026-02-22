@@ -63,7 +63,7 @@ export function HomePage({ onEnterMap }: HomePageProps) {
 
     const fetchMaps = async () => {
         try {
-            const res = await fetch('${import.meta.env.VITE_API_URL}/api/maps');
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/maps`);
             const data = await res.json();
             if (data.success) setMaps(data.data);
         } catch {
@@ -83,7 +83,7 @@ export function HomePage({ onEnterMap }: HomePageProps) {
             const isEditing = !!editingMapId;
             const id = isEditing ? editingMapId! : crypto.randomUUID();
             const method = isEditing ? 'PATCH' : 'POST';
-            const url = isEditing ? `${import.meta.env.VITE_API_URL}/api/maps/${id}` : '${import.meta.env.VITE_API_URL}/api/maps';
+            const url = isEditing ? `${import.meta.env.VITE_API_URL}/api/maps/${id}` : `${import.meta.env.VITE_API_URL}/api/maps`;
 
             const res = await fetch(url, {
                 method,
@@ -120,7 +120,7 @@ export function HomePage({ onEnterMap }: HomePageProps) {
         setMaps(reordered);
 
         try {
-            await fetch('${import.meta.env.VITE_API_URL}/api/maps/reorder', {
+            await fetch(`${import.meta.env.VITE_API_URL}/api/maps/reorder`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ orderedIds: reordered.map(m => m.id) }),

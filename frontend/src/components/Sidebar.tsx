@@ -31,7 +31,7 @@ function AddConceptPanel({ onConceptAdded, mapId }: { onConceptAdded: () => void
         const id = crypto.randomUUID();
         setLoading(true);
         try {
-            const res = await fetch('${import.meta.env.VITE_API_URL}/api/concepts', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/concepts`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ id, ...formData, mapId }),

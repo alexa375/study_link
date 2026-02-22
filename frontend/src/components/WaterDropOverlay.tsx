@@ -19,7 +19,7 @@ export function WaterDropOverlay({ isVisible }: WaterDropOverlayProps) {
     useEffect(() => {
         if (isVisible && !hasFetched) {
             setLoading(true);
-            fetch('${import.meta.env.VITE_API_URL}/api/ai/waterdrop-zoom')
+            fetch(`${import.meta.env.VITE_API_URL}/api/ai/waterdrop-zoom`)
                 .then(res => res.json())
                 .then(data => {
                     if (data.success) {
